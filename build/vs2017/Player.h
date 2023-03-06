@@ -1,5 +1,9 @@
 #pragma once
 #include "GameObject.h"
+#include "input/input_manager.h"
+#include <input/keyboard.h>
+#include <input/sony_controller_input_manager.h>
+
 class Player : public GameObject
 {
     Player* player;
@@ -12,10 +16,8 @@ public:
     ~Player();
 
     void handleInput(float dt);
+    void InitInput(gef::InputManager* in);
     void Update(float dt);
-
-    // Getters and setters for keys
-    bool isKeyDown(int key);
 
     // Getters and setters for player stats, etc.
     float getHealth();
@@ -29,6 +31,5 @@ public:
     
 
 private:
-    // Boolean array, element per key
-    bool keys[256]{ false };
+    gef::InputManager* input_manager_ = nullptr;
 };

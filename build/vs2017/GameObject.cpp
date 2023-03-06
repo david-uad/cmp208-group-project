@@ -2,6 +2,7 @@
 
 GameObject::GameObject()
 {
+	speed_ = 1;
 	// Initial transform
 	scale_ = gef::Vector4(1, 1, 1);
 	rotation_ = gef::Vector4(0, 0, 0);

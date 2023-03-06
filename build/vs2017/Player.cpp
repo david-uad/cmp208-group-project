@@ -12,37 +12,65 @@ Player::~Player()
 
 }
 
-void Player::handleInput(float dt)
+void Player::InitInput(gef::InputManager* in)
 {
-	// Handle keyboard input to control player movement
-	if (player->isKeyDown('w'))
-	{
-		// move player forward (++ y-axis)
-	}
-
-	if (player->isKeyDown('a'))
-	{
-		// move player left (-- x-axis)
-	}
-
-	if (player->isKeyDown('s'))
-	{
-		// move player backward (-- x-axis)
-	}
-
-	if (player->isKeyDown('d'))
-	{
-		// move player right (++ x-axis)
-	}
+	input_manager_ = in;
 }
 
-bool Player::isKeyDown(int key)
+void Player::handleInput(float dt)
 {
-	if (key >= 0)
+	// Local variables
+	const gef::SonyController* controller = nullptr;
+	const gef::Keyboard* keyboard = nullptr;
+	float x_mod = 0, y_mod = 0;
+
+	//// *** CONTROLLER INPUT ***
+	//// Pointer to controller
+	//controller = input_manager_->controller_input()->GetController(0);
+
+	//// Get values for x and y axis movement
+	//x_mod = controller->left_stick_x_axis();
+	//y_mod = controller->left_stick_y_axis();
+
+	// *** KEYBOARD INPUT ***
+	// Pointer to keyboard
+	keyboard = input_manager_->keyboard();
+
+	// Handle inputs
+
+	// Movement
+	if (keyboard->IsKeyDown(gef::Keyboard::KC_W))
 	{
-		return keys[key];
+		y_mod = 1;
 	}
-	return false;
+	if (keyboard->IsKeyDown(gef::Keyboard::KC_S))
+	{
+		y_mod = -1;
+	}
+	if (keyboard->IsKeyDown(gef::Keyboard::KC_D))
+	{
+		x_mod = 1;
+	}
+	if (keyboard->IsKeyDown(gef::Keyboard::KC_A))
+	{
+		x_mod = -1;
+	}
+	// Rotation
+	if (keyboard->IsKeyDown(gef::Keyboard::KC_RIGHT))
+	{
+		// Add to current rotation
+		rotation_.set_z(rotation_.z() - gef::DegToRad(1));
+	}
+	if (keyboard->IsKeyDown(gef::Keyboard::KC_LEFT))
+	{
+		// Add to current rotation
+		rotation_.set_z(rotation_.z() + gef::DegToRad(1));
+	}
+
+	// Calculate displacement per frame
+	gef::Vector4 s = gef::Vector4(x_mod * speed_ * dt, y_mod * speed_ * dt, 0);
+	// Add displacement to position
+	position_ = position_ + s;
 }
 
 float Player::getHealth()

@@ -15,7 +15,7 @@ public:
 	void InitBox2d(bool isStatic, b2Vec2 pos, b2Vec2 box);
 	void Render();
 
-private:
+protected:
 	// Call inside an update function after changing rotation_ scale_ or position_
 	void SetTransform();
 
@@ -26,6 +26,7 @@ private:
 	b2PolygonShape boundingBox_; // bounding box
 	b2FixtureDef fixDef_; // fixture definition
 
+	float speed_;
 	gef::Vector4 scale_, rotation_, position_;
 };
 
