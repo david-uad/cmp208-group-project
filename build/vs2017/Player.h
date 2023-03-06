@@ -2,12 +2,14 @@
 #include "GameObject.h"
 class Player : public GameObject
 {
-
+    Player* player;
     float health;
 
 public:
     Player();
     ~Player();
+
+    void handleInput(float dt);
 
     // Getters and setters for keys
     void setKeyDown(unsigned char key);
