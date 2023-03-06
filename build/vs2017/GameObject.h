@@ -1,7 +1,10 @@
 #pragma once
 class GameObject
 {
+	GameObject();
+	~GameObject();
 
-	// test
+	void Init();
+	void Update();
 };
 
