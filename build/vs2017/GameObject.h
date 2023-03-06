@@ -16,5 +16,9 @@ public:
 
 private:
 	b2World* world = nullptr;
+	b2BodyDef bdDef_; // body definition
+	b2Body* body_; // body pointer
+	b2PolygonShape boundingBox_; // bounding box
+	b2FixtureDef fixDef_; // fixture definition
 };
 

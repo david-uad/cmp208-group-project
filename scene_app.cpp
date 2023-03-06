@@ -26,21 +26,8 @@ void SceneApp::Init()
 	// initialise primitive builder to make create some 3D geometry easier
 	primitive_builder_ = new PrimitiveBuilder(platform_);
 
-	// setup the mesh for the player
-	player_.set_mesh(primitive_builder_->GetDefaultCubeMesh());
-
 	// initialise box2Dworld
 	b2world_ = new b2World(gravity_);
-
-	// set up player dynamic body for box2d
-	plyr_bdDef_.type = b2_dynamicBody;
-	plyr_bdDef_.position.Set(0.0, 0.4);
-	plyr_bd_ = b2world_->CreateBody(&plyr_bdDef_);
-	plyr_bb_.SetAsBox(1.0f, 1.0f);
-	plyr_fd_.shape = &plyr_bb_;
-	plyr_fd_.density = 1.0f;
-	plyr_fd_.friction = 0.3f;
-	plyr_bd_->CreateFixture(&plyr_fd_);
 
 	InitFont();
 	SetupLights();
@@ -66,10 +53,6 @@ void SceneApp::CleanUp()
 bool SceneApp::Update(float frame_time)
 {
 	fps_ = 1.0f / frame_time;
-
-	gef::Matrix44 player_transform;
-	player_transform.SetIdentity();
-	player_.set_transform(player_transform);
 
 	float timeStep = 1 / 60;
 
@@ -102,7 +85,6 @@ void SceneApp::Render()
 	renderer_3d_->Begin();
 
 	renderer_3d_->set_override_material(&primitive_builder_->red_material());
-	renderer_3d_->DrawMesh(player_);
 	renderer_3d_->set_override_material(NULL);
 
 	renderer_3d_->End();

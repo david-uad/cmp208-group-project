@@ -39,12 +39,6 @@ private:
 
 	PrimitiveBuilder* primitive_builder_;
 
-	gef::MeshInstance player_;
-	b2BodyDef plyr_bdDef_; // player body definition
-	b2Body* plyr_bd_; // player body
-	b2PolygonShape plyr_bb_; // // player bounding box
-	b2FixtureDef plyr_fd_; // fixture definition
-
 	b2World* b2world_; // box2d world
 	b2Vec2 gravity_ = { 0, 9.81 }; // gravity vector
 
