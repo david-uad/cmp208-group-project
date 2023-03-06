@@ -12,13 +12,15 @@ SceneApp::SceneApp(gef::Platform& platform) :
 	renderer_3d_(NULL),
 	primitive_builder_(NULL),
 	font_(NULL),
-	b2world_(NULL)
+	b2world_(NULL),
+	player_(NULL)
 {
 }
 
 void SceneApp::Init()
 {
 	sprite_renderer_ = gef::SpriteRenderer::Create(platform_);
+	input_manager_ = gef::InputManager::Create(platform_);
 
 	// create the renderer for draw 3D geometry
 	renderer_3d_ = gef::Renderer3D::Create(platform_);
@@ -28,6 +30,13 @@ void SceneApp::Init()
 
 	// initialise box2Dworld
 	b2world_ = new b2World(gravity_);
+
+	player_ = new Player();
+	player_->Init(renderer_3d_, b2world_);
+	player_->InitInput(input_manager_);
+	player_->set_mesh(primitive_builder_->GetDefaultCubeMesh());
+
+	
 
 	InitFont();
 	SetupLights();
@@ -56,6 +65,8 @@ bool SceneApp::Update(float frame_time)
 
 	float timeStep = 1 / 60;
 
+	input_manager_->Update();
+	player_->Update(frame_time);
 	b2world_->Step(timeStep, 6, 2);
 
 	return true;
@@ -84,6 +95,7 @@ void SceneApp::Render()
 	// draw 3d geometry
 	renderer_3d_->Begin();
 
+	player_->Render();
 	renderer_3d_->set_override_material(&primitive_builder_->red_material());
 	renderer_3d_->set_override_material(NULL);
 

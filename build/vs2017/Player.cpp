@@ -3,8 +3,8 @@
 Player::Player()
 {
 	// set default values
-	player->health = 100.0;
-	player->x, player->y = 0;
+	health = 100.0;
+	position_ = {0, 0, 0, 0};
 }
 
 Player::~Player()
@@ -90,22 +90,3 @@ void Player::setHealth(float h)
 	health = h;
 }
 
-void Player::setPlayerX(int pos)
-{
-	player->x = pos;
-}
-
-void Player::setPlayerY(int pos)
-{
-	player->y = pos;
-}
-
-int Player::getPlayerX()
-{
-	return player->x;
-}
-
-int Player::getPlayerY()
-{
-	return player->y;
-}

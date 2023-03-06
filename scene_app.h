@@ -6,6 +6,7 @@
 #include "primitive_builder.h"
 #include <graphics/mesh_instance.h>
 #include "box2d/box2d.h"
+#include "Player.h"
 
 // FRAMEWORK FORWARD DECLARATIONS
 namespace gef
@@ -31,8 +32,8 @@ private:
 	void DrawHUD();
 	void SetupLights();
 
-
-    
+	Player* player_;
+	gef::InputManager* input_manager_;
 	gef::SpriteRenderer* sprite_renderer_;
 	gef::Font* font_;
 	gef::Renderer3D* renderer_3d_;

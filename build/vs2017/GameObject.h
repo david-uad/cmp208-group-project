@@ -5,7 +5,7 @@
 #include "graphics\mesh_instance.h"
 
 #pragma once
-class GameObject : gef::MeshInstance
+class GameObject : public gef::MeshInstance
 {
 public:
 	GameObject();

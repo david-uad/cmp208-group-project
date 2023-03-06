@@ -6,11 +6,6 @@
 
 class Player : public GameObject
 {
-    Player* player;
-    float health;
-    float moveSpeed;
-    int x, y;
-
 public:
     Player();
     ~Player();
@@ -24,12 +19,11 @@ public:
     void setHealth(float h);
 
     // Getters and setters for player position
-    void setPlayerX(int lx);
-    void setPlayerY(int ly);
-    int getPlayerX();
-    int getPlayerY();
+    void setPlayerPos(float x, float y);
+    gef::Vector4 getPlayerPos();
     
 
 private:
     gef::InputManager* input_manager_ = nullptr;
+    float health;
 };
