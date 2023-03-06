@@ -11,13 +11,16 @@ public:
 	GameObject();
 	~GameObject();
 
-	void Init();
-	void Update();
+	void Init(gef::Renderer3D* r, b2World* w);
+	void Update(float dt);
+	void Render();
 
 private:
-	b2World* world = nullptr;
+
+	gef::Renderer3D* renderer_ = nullptr;
+	b2World* world_ = nullptr;
+	b2Body* body_ = nullptr; // body pointer
 	b2BodyDef bdDef_; // body definition
-	b2Body* body_; // body pointer
 	b2PolygonShape boundingBox_; // bounding box
 	b2FixtureDef fixDef_; // fixture definition
 };
