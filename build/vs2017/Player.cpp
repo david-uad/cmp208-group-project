@@ -3,7 +3,8 @@
 Player::Player()
 {
 	// set default values
-	health = 100.0;
+	player->health = 100.0;
+	player->x, player->y = 0;
 }
 
 Player::~Player()
@@ -35,22 +36,6 @@ void Player::handleInput(float dt)
 	}
 }
 
-void Player::setKeyDown(unsigned char key)
-{
-	if (key >= 0)
-	{
-		keys[key] = true;
-	}
-}
-
-void Player::setKeyUp(unsigned char key)
-{
-	if (key >= 0)
-	{
-		keys[key] = false;
-	}
-}
-
 bool Player::isKeyDown(int key)
 {
 	if (key >= 0)
@@ -68,4 +53,24 @@ float Player::getHealth()
 void Player::setHealth(float h)
 {
 	health = h;
+}
+
+void Player::setPlayerX(int pos)
+{
+	player->x = pos;
+}
+
+void Player::setPlayerY(int pos)
+{
+	player->y = pos;
+}
+
+int Player::getPlayerX()
+{
+	return player->x;
+}
+
+int Player::getPlayerY()
+{
+	return player->y;
 }
