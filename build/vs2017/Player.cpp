@@ -17,6 +17,13 @@ void Player::InitInput(gef::InputManager* in)
 	input_manager_ = in;
 }
 
+void Player::Update(float dt)
+{
+	handleInput(dt);
+
+	SetTransform();
+}
+
 void Player::handleInput(float dt)
 {
 	// Local variables
