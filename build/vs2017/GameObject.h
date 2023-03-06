@@ -12,6 +12,7 @@ public:
 	~GameObject();
 
 	void Init(gef::Renderer3D* r, b2World* w);
+	void InitBox2d(bool isStatic, b2Vec2 pos, b2Vec2 box);
 	void Update(float dt);
 	void Render();
 
