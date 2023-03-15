@@ -45,33 +45,25 @@ void Player::handleInput(float dt)
 
 	// Handle inputs
 
-	// Movement
-	if (keyboard->IsKeyDown(gef::Keyboard::KC_W))
+	// Rotation
+	if (keyboard->IsKeyDown(gef::Keyboard::KC_A))
 	{
-		y_mod = 1;
-	}
-	if (keyboard->IsKeyDown(gef::Keyboard::KC_S))
-	{
-		y_mod = -1;
+		rotation_.set_z(rotation_.z() + gef::DegToRad(1));
 	}
 	if (keyboard->IsKeyDown(gef::Keyboard::KC_D))
 	{
-		x_mod = 1;
-	}
-	if (keyboard->IsKeyDown(gef::Keyboard::KC_A))
-	{
-		x_mod = -1;
-	}
-	// Rotation
-	if (keyboard->IsKeyDown(gef::Keyboard::KC_RIGHT))
-	{
-		// Add to current rotation
 		rotation_.set_z(rotation_.z() - gef::DegToRad(1));
 	}
-	if (keyboard->IsKeyDown(gef::Keyboard::KC_LEFT))
+
+	// Movement
+	gef::Vector4 direction = gef::Vector4(sin(rotation_.z()), -cos(rotation_.z()), 0, 0);
+	if (keyboard->IsKeyDown(gef::Keyboard::KC_W))
 	{
-		// Add to current rotation
-		rotation_.set_z(rotation_.z() + gef::DegToRad(1));
+		position_ -= direction * speed_ * dt;
+	}
+	if (keyboard->IsKeyDown(gef::Keyboard::KC_S))
+	{
+		position_ += direction * speed_ * dt;
 	}
 
 	// Calculate displacement per frame
